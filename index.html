@@ -36,7 +36,6 @@
 <div id="groupsContainer"></div>
 
 <script>
-  // Data murid
   const putri = ["👧 Siswi 1","👧 Siswi 2","👧 Siswi 3"];
   const putra = [];
   for(let i=1;i<=32;i++){ putra.push("🧑 Murid " + i); }
@@ -74,8 +73,11 @@
             groups[i].push(shuffledPutra[ptr]); ptr++;
           }
         }
-      } else { // baseSize <3 → siswi dicampur
-        const allParticipants = shuffle([...putra,...putri]);
+      } else { 
+        // BaseSize <3 → hanya 1 siswi dicampur secara random
+        const randomIndex = Math.floor(Math.random()*shuffledPutri.length);
+        const oneGirl = shuffledPutri.splice(randomIndex,1)[0]; // ambil 1 siswi random
+        const allParticipants = shuffle([...shuffledPutra, oneGirl]);
         let ptr=0;
         for(let i=0;i<numGroups;i++){
           let target = baseSize + (i<extra?1:0);
@@ -84,8 +86,13 @@
             ptr++;
           }
         }
+        // Siswi tersisa dimasukkan secara acak ke kelompok lain
+        shuffledPutri.forEach(girl=>{
+          const index = Math.floor(Math.random()*numGroups);
+          groups[index].push(girl);
+        });
       }
-    } else { // Siswi dicampur
+    } else { // Siswi dicampur semua
       const allParticipants = shuffle([...putra,...putri]);
       let ptr=0;
       for(let i=0;i<numGroups;i++){
