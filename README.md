@@ -1,2 +1,2 @@
-# Buat-Kelompok-Acak
-Kelompok acak untuk 35 siswa
+# Resensi Buku
+Kisah Heroik Sang Pilot
